@@ -1,0 +1,57 @@
+<div class="min-h-screen flex items-center justify-center p-6 bg-slate-50">
+  <div class="max-w-md w-full text-center">
+    <!-- Icon Peringatan -->
+    <div
+      class="inline-flex items-center justify-center w-20 h-20 bg-amber-100 text-amber-500 rounded-full mb-6 animate-pulse"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-12 w-12"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+        />
+      </svg>
+    </div>
+
+    <!-- Pesan Error -->
+    <h1 class="text-3xl font-bold text-slate-800 mb-4">Ups! QR Tidak Aktif</h1>
+    <p class="text-slate-600 mb-8 leading-relaxed">
+      QR Code ini mungkin belum diatur oleh pemiliknya atau sedang dinonaktifkan
+      sementara waktu.
+    </p>
+
+    <!-- Kotak Info untuk Pemilik -->
+    <div class="bg-blue-50 border border-blue-100 p-6 rounded-3xl mb-8">
+      <h2
+        class="text-sm font-semibold text-blue-800 uppercase tracking-wider mb-2"
+      >
+        Apakah ini QR Code Anda?
+      </h2>
+      <p class="text-sm text-blue-600 mb-4">
+        Masuk ke akun Anda untuk mengatur link tujuan atau mengaktifkan kembali
+        status QR ini.
+      </p>
+      <a
+        href="/login"
+        class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-blue-200"
+      >
+        Login ke Dashboard
+      </a>
+    </div>
+
+    <!-- Link Kembali -->
+    <a
+      href="/"
+      class="text-sm text-slate-400 hover:text-slate-600 transition-colors"
+    >
+      &larr; Kembali ke Beranda AKyuarB
+    </a>
+  </div>
+</div>
