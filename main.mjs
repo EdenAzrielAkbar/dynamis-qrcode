@@ -33,6 +33,8 @@ app.use("/", (req, res) => {
   res.redirect("/login");
 });
 
-app.listen(port, () => {
-  console.log(`listening on: http://localhost:${port}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server jalan di port ${PORT}`));
+}
+export default app;
