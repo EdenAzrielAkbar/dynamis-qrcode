@@ -21,11 +21,9 @@ app.use(
     secret: "keyboard cats",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: process.env.NODE_ENV === 'production' ? true : false }, // otomatis aman di production
-  }),
+    cookie: { secure: false }
+  })
 );
-
-)
 app.use(express.static(path.join(__dirname, "public")));
 
 // Setup Template Engine & Views Directory
