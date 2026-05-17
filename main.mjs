@@ -4,38 +4,53 @@ import expressLayouts from "express-ejs-layouts";
 import session from "express-session";
 import passport from "passport";
 import express from "express";
-const port = process.env.PORT;
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
+
+//  Parser Data & Session )
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({
     secret: "keyboard cats",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false },
+    cookie: { secure: process.env.NODE_ENV === 'production' ? true : false }, // otomatis aman di production
   }),
 );
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+
+)
+app.use(express.static(path.join(__dirname, "public")));
+
+// Setup Template Engine & Views Directory
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-
+//  Passport & Layouts 
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(expressLayouts);
 app.set("layout", "layout/main");
 
+// Routing Aplikasi
 app.use("/", authRouter);
 app.use("/", indexRouter);
-app.use("/", (req, res) => {
+
+
+app.use((req, res) => {
   res.redirect("/login");
 });
+
 
 if (process.env.NODE_ENV !== 'production') {
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`Server jalan di port ${PORT}`));
 }
+
 export default app;
