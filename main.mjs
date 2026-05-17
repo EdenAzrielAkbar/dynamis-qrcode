@@ -16,14 +16,15 @@ app.use(
     cookie: { secure: false },
   }),
 );
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.set("view engine", "ejs");
 
-app.set("view engine", "ejs");
-app.set("view engine", "ejs");
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(expressLayouts);
 app.set("layout", "layout/main");
 
