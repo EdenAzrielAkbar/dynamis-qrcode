@@ -1,5 +1,4 @@
 <div class="min-h-screen bg-slate-50">
-  <!-- Navbar -->
   <nav
     class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center"
   >
@@ -12,31 +11,7 @@
 
   <main class="max-w-4xl mx-auto p-6 lg:p-12">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- Kolom Kiri: QR Code Card -->
-      <div
-        class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 text-center"
-      >
-        <h3 class="text-lg font-semibold mb-6 text-slate-800">QR Code Anda</h3>
-        <div class="bg-slate-100 p-4 rounded-2xl inline-block mb-6">
-          <img
-            src="<%= user.qr_code %>"
-            alt="QR Code"
-            id="qrImage"
-            class="w-48 h-48 mx-auto"
-          />
-        </div>
-        <a
-          href="<%= user.qr_code %>"
-          download="MyQR-AKyuarB.png"
-          class="block w-full py-3 bg-slate-800 text-white rounded-xl font-medium hover:bg-slate-700 transition-all"
-        >
-          Unduh QR Code
-        </a>
-      </div>
-
-      <!-- Kolom Kanan: Control Panel -->
       <div class="flex flex-col gap-6">
-        <!-- Status Card -->
         <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
           <div class="flex justify-between items-center">
             <div>
@@ -45,7 +20,6 @@
                 <%= user.is_active === 1 ? 'Aktif' : 'Nonaktif' %>
               </p>
             </div>
-            <!-- Toggle Switch (onclick dihapus) -->
             <button
               id="btnToggle"
               class="relative inline-flex items-center h-7 w-12 rounded-full transition-colors duration-200 focus:outline-none <%= user.is_active === 1 ? 'bg-blue-600' : 'bg-slate-300' %>"
@@ -58,10 +32,8 @@
           </div>
         </div>
 
-        <!-- Input Link Card -->
         <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
           <h3 class="font-semibold text-slate-800 mb-4">Link Tujuan</h3>
-          <!-- Form (onsubmit dihapus) -->
           <form id="linkForm" class="space-y-4">
             <input
               type="url"
@@ -103,11 +75,31 @@
           </form>
         </div>
       </div>
+
+      <div
+        class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 text-center"
+      >
+        <h3 class="text-lg font-semibold mb-6 text-slate-800">QR Code Anda</h3>
+        <div class="bg-slate-100 p-4 rounded-2xl inline-block mb-6">
+          <img
+            src="<%= user.qr_code %>"
+            alt="QR Code"
+            id="qrImage"
+            class="w-48 h-48 mx-auto"
+          />
+        </div>
+        <a
+          href="<%= user.qr_code %>"
+          download="MyQR-AKyuarB.png"
+          class="block w-full py-3 bg-slate-800 text-white rounded-xl font-medium hover:bg-slate-700 transition-all"
+        >
+          Unduh QR Code
+        </a>
+      </div>
     </div>
   </main>
 </div>
 
-<!-- Data untuk JS Eksternal -->
 <div
   id="dashboard-data"
   class="hidden"
@@ -115,12 +107,9 @@
   data-user-name="<%= user.nama %>"
 ></div>
 
-<!-- Container Toast (Hanya Satu) -->
 <div
   id="toast-container"
   class="fixed bottom-5 right-5 z-50 flex flex-col gap-2"
 ></div>
 
-<!-- Memanggil JS Eksternal -->
-<!-- Catatan: Biasanya 'public' tidak ditulis di URL jika sudah diatur app.use(express.static('public')) -->
 <script src="/js/script.js"></script>
