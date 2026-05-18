@@ -3,7 +3,7 @@ import QRCode from "qrcode";
 async function generateQr(email) {
   try {
     const encodedEmail = Buffer.from(email).toString("base64");
-    const bridgeUrl = `http://localhost:5000/usr/${encodedEmail}`;
+    const bridgeUrl = `http://akyuarb.vercel.app/usr/${encodedEmail}`;
     const qrCode = await QRCode.toDataURL(bridgeUrl, {
       errorCorrectionLevel: "H",
       margin: 2,
