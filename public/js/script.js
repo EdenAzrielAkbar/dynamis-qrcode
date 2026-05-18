@@ -1,5 +1,3 @@
-// public/js/dashboard.js
-
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Ambil Elemen & Data
   const dashboardData = document.getElementById("dashboard-data");
