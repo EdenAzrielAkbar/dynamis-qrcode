@@ -2,7 +2,7 @@ import "dotenv/config";
 import express from "express";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { addUser, findUser } from "../models/user.mjs";
+import { addUser, findUser, updateQr } from "../models/user.mjs";
 import { generateQr } from "./qrController.mjs";
 
 passport.use(

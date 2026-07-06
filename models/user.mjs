@@ -30,18 +30,17 @@ async function updateStatus(email, status) {
 }
 
 async function updateQr(email, qrCode) {
-  await ConnectDb.updateOne(
-    {
-      gmail: email,
-    },
-    {
-      $set: { qr_code: qrCode },
-    },
+  const updatedUser = await ConnectDb.findOneAndUpdate(
+    { gmail: email },
+    { $set: { qr_code: qrCode } },
+    { new: true },
   );
+
+  return updatedUser;
 }
 
 async function deleteAccount(email) {
   await ConnectDb.deleteOne({ gmail: email });
 }
 
-export { addUser, findUser, updateLink, updateStatus, deleteAccount };
+export { addUser, findUser, updateLink, updateStatus, deleteAccount, updateQr };
