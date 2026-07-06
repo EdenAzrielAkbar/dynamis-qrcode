@@ -112,3 +112,36 @@ function showToast(message, type = "success") {
     setTimeout(() => toast.remove(), 300);
   }, 3500);
 }
+document
+  .getElementById("btnDeleteAccount")
+  ?.addEventListener("click", async () => {
+    const konfirmasi = confirm(
+      "Apakah Anda benar-benar yakin ingin menghapus akun ini?\nTindakan ini bersifat PERMANEN dan QR Code Anda tidak akan bisa diakses lagi oleh siapapun.",
+    );
+
+    if (konfirmasi) {
+      try {
+        const response = await fetch("/delete-account", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert(data.message || "Akun Anda berhasil dihapus.");
+          // Mengalihkan pengguna langsung ke halaman utama/login
+          window.location.href = "/login?status=account_deleted";
+        } else {
+          alert(data.message || "Gagal menghapus akun.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert(
+          "Terjadi kesalahan jaringan atau server saat mencoba menghapus akun.",
+        );
+      }
+    }
+  });

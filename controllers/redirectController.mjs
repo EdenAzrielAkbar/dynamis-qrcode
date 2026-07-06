@@ -1,4 +1,9 @@
-import { updateLink, updateStatus, findUser } from "../models/user.mjs";
+import {
+  updateLink,
+  updateStatus,
+  findUser,
+  deleteAccount,
+} from "../models/user.mjs";
 
 async function redirectLink(req, res) {
   try {
@@ -41,5 +46,29 @@ async function handleStatus(req, res) {
       .json({ success: false, message: "gagal mengupadate status" });
   }
 }
+async function handleDeleteAccount(req, res) {
+  try {
+    const userEmail = req.user.gmail;
 
-export { handleRedirect, handleStatus, redirectLink };
+    await deleteAccount(userEmail);
+
+    req.logout(function (err) {
+      if (err) {
+        console.error("Gagal membersihkan sesi login:", err);
+        return res
+          .status(500)
+          .json({ message: "Akun terhapus, tetapi sesi gagal dibersihkan" });
+      }
+
+      res.json({
+        success: true,
+        message: "Berhasil menghapus akun dan Anda telah logout",
+      });
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Gagal menghapus akun" });
+  }
+}
+
+export { handleRedirect, handleStatus, redirectLink, handleDeleteAccount };

@@ -29,4 +29,8 @@ async function updateStatus(email, status) {
   );
 }
 
-export { addUser, findUser, updateLink, updateStatus };
+async function deleteAccount(email) {
+  await ConnectDb.deleteOne({ gmail: email });
+}
+
+export { addUser, findUser, updateLink, updateStatus, deleteAccount };
