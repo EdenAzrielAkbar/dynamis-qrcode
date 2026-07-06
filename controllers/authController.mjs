@@ -17,8 +17,10 @@ passport.use(
         const email = profile.emails[0].value;
         let user = await findUser(email);
         if (!user) {
-          const createQr = await generateQr(email);
-          user = await addUser(email, createQr);
+          user = await addUser(email, "");
+          const userId = user._id;
+          const createQr = await generateQr(email, userId);
+          user = await updateQr(email, createQr);
           return done(null, user);
         }
         return done(null, user);

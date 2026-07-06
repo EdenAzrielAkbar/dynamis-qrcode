@@ -29,6 +29,17 @@ async function updateStatus(email, status) {
   );
 }
 
+async function updateQr(email, qrCode) {
+  await ConnectDb.updateOne(
+    {
+      gmail: email,
+    },
+    {
+      $set: { qr_code: qrCode },
+    },
+  );
+}
+
 async function deleteAccount(email) {
   await ConnectDb.deleteOne({ gmail: email });
 }
