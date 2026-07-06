@@ -21,9 +21,15 @@ async function redirectLink(req, res) {
 async function handleRedirect(req, res) {
   try {
     const { id } = req.params;
-    const decodedEmail = Buffer.from(id, "base64").toString("ascii");
-    const user = await findUser(decodedEmail);
-    if (user && user.is_active === 1 && user.link_tujuan) {
+    const decodedString = Buffer.from(id, "base64").toString("ascii");
+    const [email, userId] = decodedString.split(":");
+    const user = await findUser(email);
+    if (
+      user &&
+      user.is_active === 1 &&
+      user._id.toString() === userId.trim() &&
+      user.link_tujuan
+    ) {
       return res.redirect(user.link_tujuan);
     }
     res.status(404).redirect("/error");
