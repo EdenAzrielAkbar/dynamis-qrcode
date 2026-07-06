@@ -7,7 +7,8 @@ async function addUser(email, qr) {
     is_active: 0,
     qr_code: qr,
   };
-  await ConnectDb.insertOne(newUser);
+  const result = await ConnectDb.insertOne(newUser);
+  newUser._id = result.insertedId;
   return newUser;
 }
 
