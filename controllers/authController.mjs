@@ -32,11 +32,16 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.gmail);
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
+passport.deserializeUser(async (email, done) => {
+  try {
+    const user = await findUser(email);
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
 });
 
 export default passport;
